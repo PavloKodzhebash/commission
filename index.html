@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weekly Commission</title>
+</head>
+<body>
+
+<script>
+let name;
+let input;
+let subtotal = 0;
+let commissionRate = 0;
+let commission = 0;
+let totalEarnings = 0;
+
+// 1. name
+name = prompt("Enter your name:");
+
+// 2. Post-test loop
+do {
+    input = prompt("Enter sale amount or type Done:");
+
+    if (input !== "Done") {
+        let sale = parseFloat(input);
+        if (!isNaN(sale) && sale > 0) {
+            subtotal += sale;
+        }
+    }
+
+} while (input !== "Done");
+
+// 3. Commission rate
+if (subtotal <= 0) {
+    commissionRate = 0;
+} else if (subtotal <= 499.99) {
+    commissionRate = 0.05;
+} else if (subtotal <= 999.99) {
+    commissionRate = 0.10;
+} else {
+    commissionRate = 0.15;
+}
+
+// 4. Calculations
+commission = subtotal * commissionRate;
+totalEarnings = subtotal + commission;
+
+// 5. Formatting
+subtotal = subtotal.toFixed(2);
+commission = commission.toFixed(2);
+totalEarnings = totalEarnings.toFixed(2);
+let ratePercent = (commissionRate * 100).toFixed(2);
+
+// 6. Single output
+document.write(`
+<html>
+<head>
+<style>
+body {
+    font-family: Arial;
+    background: #f2f2f2;
+    padding: 40px;
+}
+.box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 500px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+h2 { color: #2c3e50; }
+</style>
+</head>
+<body>
+<div class="box">
+<h2>Hello ${name}, Here is your Weekly Commission Report.</h2>
+
+<p>Your sales total is $${subtotal}, so your commission rate is ${ratePercent}%</p>
+<p>Your total commission is $${commission}.</p>
+<p>Your total earnings are $${totalEarnings}</p>
+</div>
+</body>
+</html>
+`);
+</script>
+
+</body>
+</html>
